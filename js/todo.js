@@ -1,19 +1,25 @@
 const arrayOfObjects = [
-    // {
-    //     taskName: "report",
-    //     completed: true,
+    {
+        taskName: "report",
+        completed: true,
 
-    // },
-    // {
-    //     taskName: "coding",
-    //     completed: true,
+    },
+    {
+        taskName: "coding",
+        completed: true,
 
-    // },
-    // {
-    //     taskName: "js",
-    //     completed: true,
+    },
+    {
+        taskName: "js",
+        completed: true,
 
-    // }
+    }
+    ,
+    {
+        taskName: "react",
+        completed: true,
+
+    }
 
 ]
 
@@ -69,13 +75,13 @@ function addTodo(e) {
 
 function viewInformation(arrayOfObjects) {
     listHeading.innerHTML = `${arrayOfObjects.length} tasks remains`
+    const li = document.createElement("li")
 
     for (let i = 0; i < arrayOfObjects.length; i++) {
 
 
         // labels[i].innerHTML = arrayOfObjects[i].taskName
-        const li = document.createElement("li")
-        li.innerHTML =
+        li.innerHTML +=
             `<li class="todo">
         <div class="stack-small">
             <div class="c-cb"><input type="checkbox"><label class="todo-label">${arrayOfObjects[i].taskName}</label></div>
@@ -86,11 +92,9 @@ function viewInformation(arrayOfObjects) {
         </div>
         </li>`
 
-        
-        todoList.appendChild(li)
-
-
     }
+
+    todoList.innerHTML=li.innerHTML
 
     checkState()
 
@@ -98,7 +102,7 @@ function viewInformation(arrayOfObjects) {
 
 
 
-// viewInformation(arrayOfObjects)
+viewInformation(arrayOfObjects)
 
 
 
