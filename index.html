@@ -18,13 +18,19 @@
                 <button type="submit" class="btn btn__primary btn__lg">Add</button>
             </form>
             <div class="filters btn-group stack-exception">
-                <button type="button" class="btn toggle-btn"
+                <button data-filter="all" type="button" class="btn toggle-btn"
                     aria-pressed="true"><span class="visually-hidden">Show </span><span>All</span><span
-                        class="visually-hidden"> tasks</span></button><button type="button" class="btn toggle-btn"
+                        class="visually-hidden"> tasks</span>
+                </button>
+                <button data-filter="active" type="button" class="btn toggle-btn"
                     aria-pressed="false"><span class="visually-hidden">Show </span><span>Active</span><span
-                        class="visually-hidden"> tasks</span></button><button type="button" class="btn toggle-btn"
+                        class="visually-hidden"> tasks</span>    
+                </button>
+                <button data-filter="completed" type="button" class="btn toggle-btn"
                     aria-pressed="false"><span class="visually-hidden">Show </span><span>Completed</span><span
-                        class="visually-hidden"> tasks</span></button></div>
+                        class="visually-hidden"> tasks</span>
+                </button>
+            </div>
               <h2 id="list-heading" tabindex="-1"></h2>
             <ul role="list" class="todo-list stack-large stack-exception" aria-labelledby="list-heading">
             </ul>
