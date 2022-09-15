@@ -2,22 +2,29 @@ const arrayOfObjects = [
     {
         taskName: "report",
         completed: true,
+        id:1 
+    
 
     },
     {
         taskName: "coding",
         completed: true,
+        id:2 
+
 
     },
     {
         taskName: "js",
         completed: true,
+        id:3 
+
 
     }
     ,
     {
         taskName: "react",
         completed: false,
+        id:4
 
     }
 
@@ -40,7 +47,7 @@ function addTodo(e) {
     const box = document.querySelector("#new-todo-input")
     let inputValue = box.value
     if (inputValue !== '') {
-        arrayOfObjects.push({ taskName: inputValue, completed: false })
+        arrayOfObjects.push({ taskName: inputValue, completed: false , id : arrayOfObjects.length+1 })
         viewInformation(arrayOfObjects)
         box.value=''
     }
@@ -55,21 +62,21 @@ function viewInformation(arrayOfObjects) {
 
     for (let i = 0; i < arrayOfObjects.length; i++) {
         li.innerHTML +=
-        `<li class="todo">
+        `<li class="todo" data-id=${i+1} >
         <div class="stack-small">
             <div class="c-cb"><input type="checkbox"><label class="todo-label">${arrayOfObjects[i].taskName}</label></div>
             <div class="btn-group">
-                <button type="button" class="btn">Edit <span class="visually-hidden">Task#1</span></button>
-                <button type="button" class="btn btn__danger">Delete <span class="visually-hidden">Task#1</span></button>
+                <button type="button" onclick="editFunc(event)" class="btn">Edit <span class="visually-hidden">Task#1</span></button>
+                <button type="button" onclick="deleteFunc(event)" class="btn btn__danger">Delete <span class="visually-hidden">Task#1</span></button>
             </div>
         </div>
         </li>
-        
         `
 
     }
     todoList.innerHTML=li.innerHTML
     checkState()
+    
     
 
 }
@@ -86,36 +93,47 @@ function checkState() {
 
 }
 
-
 //Delete feature : 
-let deleteButtons = document.querySelectorAll(".btn__danger")
-deleteButtons.forEach(function(button){
-    button.addEventListener('click',deleteFunc)
-    
-    function deleteFunc(e){
-        let element = e.target.parentElement.parentElement.parentElement
-        console.log(element)
-        element.remove()
 
+function deleteFunc(e){
+    // getting li elemnt
+    const liElement = e.target.parentElement.parentElement.parentElement
+    // removing li element
+    liElement.remove()
+    // getting li dataset id 
+    const dataId = liElement.dataset.id
 
-        let labelText = element.children[0].children[0].children[1].innerText
-        console.log(labelText)
-
-        for (let i = 0; i < arrayOfObjects.length; i++) {
-            if(labelText==arrayOfObjects[i].taskName){
-                arrayOfObjects.splice(arrayOfObjects.indexOf(arrayOfObjects[i]),1)
-            }
+    for (let i = 0; i < arrayOfObjects.length; i++) {
+        if(dataId==arrayOfObjects[i].id){
+            arrayOfObjects.splice(arrayOfObjects.indexOf(arrayOfObjects[i]),1)
         }
-        
-        listHeading.innerHTML = `${arrayOfObjects.length} tasks remains`
-
     }
-})
+    listHeading.innerHTML = `${arrayOfObjects.length} tasks remains`
+}
 
 
 
 
+// edit feature :
+function editFunc(e){
+    const liElement = e.target.parentElement.parentElement.parentElement   
+    console.log(liElement) 
+    let label = document.querySelector(`[data-id='${liElement.dataset.id}'] label `)
+    console.log(label)
+    label.innerHTML = `<input id="editInput" onblur="myFunction()" type="text" value="${label.innerText}" >`
+    var x = document.getElementById("editInput");
+    // x.value =    
+}
 
+function myFunction(){
+    let x = document.getElementById("editInput");
+    let parg = document.createElement("p") 
+    if(x.value!==''){
+        parg.innerText = x.value
+        x.innerHTML = parg.innerHTML
+        // x.parentNode.replaceChild(parg,x)
+    }
+}
 
 
 // filter feature : 
