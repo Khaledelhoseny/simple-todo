@@ -116,22 +116,32 @@ function deleteFunc(e){
 
 // edit feature :
 function editFunc(e){
+    // e.preventDefault()
     const liElement = e.target.parentElement.parentElement.parentElement   
     console.log(liElement) 
     let label = document.querySelector(`[data-id='${liElement.dataset.id}'] label `)
     console.log(label)
-    label.innerHTML = `<input id="editInput" onblur="myFunction()" type="text" value="${label.innerText}" >`
-    var x = document.getElementById("editInput");
+    const labelText = label.innerText
+    // if(label.innerHTML===`<input id="editInput" onblur="myFunction()" type="text" value="${labelText}">`){
+    //     label.innerHTML = `<label class="todo-label">${label.innerText}</label>`
+    // }else{
+        label.innerHTML = `<input id="editInput" onblur="myFunction()" type="text" value="${labelText}">`
+        
+    // }
+    
+    
     // x.value =    
 }
 
 function myFunction(){
     let x = document.getElementById("editInput");
-    let parg = document.createElement("p") 
+    let label = document.createElement("label") 
     if(x.value!==''){
-        parg.innerText = x.value
-        x.innerHTML = parg.innerHTML
-        // x.parentNode.replaceChild(parg,x)
+        label.innerText = x.value
+        // x.innerHTML = label.innerHTML
+        x.parentNode.replaceChild(label,x)
+
+     
     }
 }
 
